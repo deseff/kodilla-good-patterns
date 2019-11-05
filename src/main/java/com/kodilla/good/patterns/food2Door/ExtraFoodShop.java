@@ -2,6 +2,7 @@ package com.kodilla.good.patterns.food2Door;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ExtraFoodShop implements Supplier {
     private ArrayList<Product> productsList;
@@ -23,11 +24,14 @@ public class ExtraFoodShop implements Supplier {
 
     @Override
     public boolean process(OrderRequest orderRequest) throws ProductNotFoundException {
-        for (int i = 0; i < productsList.size(); i++) {
-            if (orderRequest.getProduct().getProductName().equals(productsList.get(i))) {
-                System.out.println("Order in ExtraFoodShop has been placed.");
-                return true;
-            } else throw new ProductNotFoundException("Product " + orderRequest.getProduct() + " was not found.");
-        } return false;
+        Optional<Product> productOptional = productsList.stream()
+                .filter(productInList -> productInList.getProductName().equals(orderRequest.getProduct().getProductName()))
+                .findAny();
+
+        if (productOptional.isPresent()) {
+            System.out.println("Order in ExtraFoodShop has been placed.");
+            return true;
+        }
+        throw new ProductNotFoundException("Product " + orderRequest.getProduct().getProductName() + " was not found.");
     }
 }
