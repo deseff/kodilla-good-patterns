@@ -5,11 +5,9 @@ import java.util.List;
 
 public class ExtraFoodShop implements Supplier {
     private ArrayList<Product> productsList;
-    private Product product;
-//    private OrderRequest orderRequest;
 
     public ExtraFoodShop(ArrayList<Product> productsList) {
-        productsList = productsList;
+        this.productsList = productsList;
     }
 
     private List<Product> createProductsList() {
