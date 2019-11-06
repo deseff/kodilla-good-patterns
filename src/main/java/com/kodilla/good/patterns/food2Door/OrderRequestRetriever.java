@@ -5,7 +5,7 @@ public class OrderRequestRetriever {
 
     public OrderRequest retrieve() {
         Supplier supplier = extraFoodShop;
-        Product product = new Product("Shrimps", 40);
+        Product product = new Product("Clams", 40);
         Double quantity = 2.0;
 
         return new OrderRequest(supplier, product, quantity);
