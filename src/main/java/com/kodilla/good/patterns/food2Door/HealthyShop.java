@@ -2,6 +2,7 @@ package com.kodilla.good.patterns.food2Door;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class HealthyShop implements Supplier {
     private Map<Integer, Product> productsMap;
@@ -23,11 +24,17 @@ public class HealthyShop implements Supplier {
 
     @Override
     public boolean process(OrderRequest orderRequest) throws ProductNotFoundException {
-        for (int i = 0; i < productsMap.size(); i++) {
-            if (orderRequest.getProduct().getProductName().equals(productsMap.get(i).getProductName())) {
-                System.out.println("Order in HealthyShop has been placed.");
-                return true;
-            } else throw new ProductNotFoundException("Product " + orderRequest.getProduct() + " was not found.");
-        } return false;
+        Optional<Product> productOptional = productsMap.entrySet().stream()
+                .flatMap()
+//                .flatMap(productInMap -> productInMap.getValue())
+//                .filter(productInList -> productInList.getProductName().equals(orderRequest.getProduct().getProductName()))
+                .findAny();
+
+        if (productOptional.isPresent()) {
+            System.out.println("Order in HealthyShop has been placed.");
+            return true;
+        }
+        throw new ProductNotFoundException("Product " + orderRequest.getProduct().getProductName() + " was not found.");
+    }
     }
 }
