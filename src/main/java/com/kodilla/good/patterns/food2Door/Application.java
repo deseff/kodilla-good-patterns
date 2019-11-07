@@ -1,19 +1,15 @@
 package com.kodilla.good.patterns.food2Door;
 
 public class Application {
-    ExtraFoodShop extraFoodShop;
-    GlutenFreeShop glutenFreeShop;
-    HealthyShop healthyShop;
 
-    public static void main(String[] args) throws ProductNotFoundException, ShopNotFoundException {
+    public static void main(String[] args) {
 
-        OrderProcessor orderProcessor = new OrderProcessor();
+        OrderRequestRetriever orderRequestRetriever = new OrderRequestRetriever();
+        OrderRequest orderRequest = orderRequestRetriever.retrieve();
 
-        OrderDto orderDto = new OrderDto();
+        OrderDto orderDto = new OrderDto(orderRequest.getShopTypeEnum());
 
+        OrderProcessor orderProcessor = new OrderProcessor(new FoodOrderService());
         orderProcessor.processOrder(orderDto);
-
-
-
     }
 }

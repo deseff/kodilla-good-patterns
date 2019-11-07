@@ -1,25 +1,19 @@
 package com.kodilla.good.patterns.food2Door;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class ExtraFoodShop implements Supplier {
     private ArrayList<Product> productsList;
 
-    public ExtraFoodShop(ArrayList<Product> productsList) {
-        this.productsList = productsList;
-    }
+    public ExtraFoodShop() {
 
-    private List<Product> createProductsList() {
         productsList = new ArrayList<>();
 
         productsList.add(new Product("Shrimps", 40));
         productsList.add(new Product("Caviar", 100));
         productsList.add(new Product("Saffron", 30));
         productsList.add(new Product("Clams", 50));
-
-        return productsList;
     }
 
     @Override
