@@ -16,17 +16,24 @@ public class OrderProcessor {
             case EXTRA_FOOD_SHOP:
                 ExtraFoodShop extraFoodShop = new ExtraFoodShop();
                 extraFoodShop.process(orderRequest);
+                orderService.order(orderRequest.getProduct(), orderRequest.getQuantity(), orderDto.getShopTypeEnum());
+                break;
 
             case GLUTEN_FREE_SHOP:
                 GlutenFreeShop glutenFreeShop = new GlutenFreeShop();
                 glutenFreeShop.process(orderRequest);
+                orderService.order(orderRequest.getProduct(), orderRequest.getQuantity(), orderDto.getShopTypeEnum());
+                break;
 
             case HEALTHY_SHOP:
                 HealthyShop healthyShop = new HealthyShop();
                 healthyShop.process(orderRequest);
+                orderService.order(orderRequest.getProduct(), orderRequest.getQuantity(), orderDto.getShopTypeEnum());
+                break;
 
             default:
                 throw new ShopNotFoundException("Shop not found");
         }
+
     }
 }
