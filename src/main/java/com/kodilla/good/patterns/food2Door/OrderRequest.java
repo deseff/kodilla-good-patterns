@@ -1,18 +1,14 @@
 package com.kodilla.good.patterns.food2Door;
 
 public class OrderRequest {
-    private Supplier supplier;
     private Product product;
     private double quantity;
+    ShopTypeEnum shopTypeEnum;
 
-    public OrderRequest(Supplier supplier, Product product, double quantity) {
-        this.supplier = supplier;
+    public OrderRequest(Product product, double quantity, ShopTypeEnum shopTypeEnum) {
         this.product = product;
         this.quantity = quantity;
-    }
-
-    public Supplier getSupplier() {
-        return supplier;
+        this.shopTypeEnum = shopTypeEnum;
     }
 
     public Product getProduct() {
@@ -21,5 +17,9 @@ public class OrderRequest {
 
     public double getQuantity() {
         return quantity;
+    }
+
+    public ShopTypeEnum getShopTypeEnum() {
+        return shopTypeEnum;
     }
 }

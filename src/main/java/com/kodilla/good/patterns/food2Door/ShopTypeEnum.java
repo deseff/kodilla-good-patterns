@@ -5,3 +5,4 @@ public enum ShopTypeEnum {
     GLUTEN_FREE_SHOP,
     HEALTHY_SHOP
 }
+

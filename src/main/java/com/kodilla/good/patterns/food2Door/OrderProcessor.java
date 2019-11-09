@@ -1,30 +1,28 @@
 package com.kodilla.good.patterns.food2Door;
 
 public class OrderProcessor {
-    OrderRequest orderRequest;
-    private final ExtraFoodShop extraFoodShop;
-    private final GlutenFreeShop glutenFreeShop;
-    private final HealthyShop healthyShop;
+    private OrderService orderService;
 
-    public OrderProcessor(ExtraFoodShop extraFoodShop, GlutenFreeShop glutenFreeShop, HealthyShop healthyShop) {
-        this.extraFoodShop = extraFoodShop;
-        this.glutenFreeShop = glutenFreeShop;
-        this.healthyShop = healthyShop;
+    public OrderProcessor(OrderService orderService) {
+        this.orderService = orderService;
     }
 
-    void processOrder (OrderDto orderDto) {
-//        Supplier supplier = orderDto.getSupplier();
-        double quantity = orderDto.getQuantity();
-        String product = orderDto.getProduct();
+    OrderRequestRetriever orderRequestRetriever = new OrderRequestRetriever();
+    OrderRequest orderRequest = orderRequestRetriever.retrieve();
+
+    void processOrder(OrderDto orderDto) {
 
         switch (orderDto.getShopTypeEnum()) {
             case EXTRA_FOOD_SHOP:
+                ExtraFoodShop extraFoodShop = new ExtraFoodShop();
                 extraFoodShop.process(orderRequest);
 
             case GLUTEN_FREE_SHOP:
+                GlutenFreeShop glutenFreeShop = new GlutenFreeShop();
                 glutenFreeShop.process(orderRequest);
 
             case HEALTHY_SHOP:
+                HealthyShop healthyShop = new HealthyShop();
                 healthyShop.process(orderRequest);
 
             default:
